@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Album of the Day</title>
+  <style>
+    /* Overall body styling */
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #111;
+      font-family: 'Helvetica Neue', sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+    /* Container that centers content */
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    /* Album card styling: set max-width smaller to avoid being too massive */
+    .album-card {
+      background: #222;
+      border-radius: 8px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.8);
+      padding: 40px;
+      margin: 0 auto 40px auto;
+      max-width: 500px; /* Reduced width */
+    }
+    .album-card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .album-card h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .album-card h2 {
+      font-size: 1.8em;
+      margin-bottom: 30px;
+      color: #ddd;
+    }
+    
+}
+  </style>
+  
+  
+  </head>
+<body>
+  <!-- Album info will be displayed inside this card -->
+  <div class="album-card" id="album-container"></div>
+  
+<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
+<hyvor-talk-comments
+	website-id="12989"
+	page-id=""
+></hyvor-talk-comments>
+
+  
+  <script>
+    // Step 3: Embed your album data array
+    const albumData = [
+  {
+    "Title": "Blonde",
+    "Artist": "Frank Ocean",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c5649add07ed3720be9d5526"
+  },
+  {
+    "Title": "My beautiful dark twisted fantasy",
+    "Artist": "Kanye West",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d9194aa18fa4c9362b47464f"
+  },
+  {
+    "Title": "Beyoncé",
+    "Artist": "Beyoncé",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730d1d6e9325275f104f8e33f3"
+  },
+  {
+    "Title": "To pimp a butterfly",
+    "Artist": "Kendrick Lamar",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273cdb645498cd3d8a2db4d05e1"
+  },
+  {
+    "Title": "The idler wheel is wiser than the driver of the screw and whipping cords will serve you more than ropes will ever do",
+    "Artist": "Fiona Apple",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731443bd487a471868735f050b"
+  },
+  {
+    "Title": "A seat at the table",
+    "Artist": "Solange",
+    "CoverArtURL": "https://media.pitchfork.com/photos/5929be4b5e6ef95969323215/master/pass/f4b40c2b.jpg"
+  },
+  {
+    "Title": "Modern vampires of the city",
+    "Artist": "Vampire weekend",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273654afcab578b93f29ca55a29"
+  },
+  {
+    "Title": "Body talk",
+    "Artist": "Robyn",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734689597708c1b0b3dcb9ecaf"
+  },
+  {
+    "Title": "Black Messiah",
+    "Artist": "D'Angelo and the Vanguard",
+    "CoverArtURL": "https://media.pitchfork.com/photos/5929aba3c0084474cd0c13dd/"
+  },
+  {
+    "Title": "Channel orange",
+    "Artist": "Frank Ocean",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737aede4855f6d0d738012e2e5"
+  },
+  {
+    "Title": "Art angels",
+    "Artist": "Grimes",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730f751d4123932ee82e78aae1"
+  },
+  {
+    "Title": "Anti",
+    "Artist": "Rihanna",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27333c6b920eabcf4c00d7a1093"
+  },
+  {
+    "Title": "Take care",
+    "Artist": "Drake",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c7ea04a9b455e3f68ef82550"
+  },
+  {
+    "Title": "Melodrama",
+    "Artist": "Lorde",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f8553e18a11209d4becd0336"
+  },
+  {
+    "Title": "Yeezus",
+    "Artist": "Kanye West",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731dacfbc31cc873d132958af9"
+  },
+  {
+    "Title": "Have one on me",
+    "Artist": "Joanna Newsom",
+    "CoverArtURL": "https://media.pitchfork.com/photos/5929a869c0084474cd0c0e0c/master/pass/e63def14.jpg"
+  },
+  {
+    "Title": "Carrie & Lowell",
+    "Artist": "Sufjan Stevens",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273820e2ac14772ae3162c6d479"
+  },
+  {
+    "Title": "Good kid : m.a.a.d. City",
+    "Artist": "Kendrick Lamar",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732cd55246d935a8a77cb4859e"
+  },
+  {
+    "Title": "Norman fucking Rockwell!",
+    "Artist": "Lana del Rey",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273879e9318cb9f4e05ee552ac9"
+  },
+  {
+    "Title": "Double cup",
+    "Artist": "DJ Rashad",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27325429a189b884b9c453852a0"
+  },
+  {
+    "Title": "Teen dream",
+    "Artist": "Beach house",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273511607625569053920e59fc0"
+  },
+  {
+    "Title": "Kaputt",
+    "Artist": "Destroyer",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27365f8cdfaf57ef81d76f3ed9d"
+  },
+  {
+    "Title": "Golden hour",
+    "Artist": "Kacey Musgraves",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732e35d25eb7288830d5540484"
+  },
+  {
+    "Title": "Ctrl",
+    "Artist": "SZA",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734c79d5ec52a6d0302f3add25"
+  },
+  {
+    "Title": "In colour",
+    "Artist": "Jamie XX",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2733b104b3cfcf52e380e90254d"
+  },
+  {
+    "Title": "Burn your fire for no witness",
+    "Artist": "Angel Olsen",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27388cc55a8295f8e8c34259408"
+  },
+  {
+    "Title": "Some rap songs",
+    "Artist": "Earl Sweatshirt",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732b688ab63b1a5f281cfdf451"
+  },
+  {
+    "Title": "Lp1",
+    "Artist": "Fka twigs",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27377a39a4e1d5d0f24dac1130a"
+  },
+  {
+    "Title": "Halycon digest",
+    "Artist": "Deerhunter",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d309cdaf6a4b22a4d80ef343"
+  },
+  {
+    "Title": "Puberty 2",
+    "Artist": "Mitski",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27329eb9ad9b9af34bbb54eb053"
+  },
+  {
+    "Title": 4,
+    "Artist": "Beyoncé",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ff5429125128b43572dbdccd"
+  },
+  {
+    "Title": "Bon iver",
+    "Artist": "Bon iver",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734b6b1547455bbecb9f6bba64"
+  },
+  {
+    "Title": "U.f.o.f.",
+    "Artist": "Big thief",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a946cb4884f80c38f3c2287b"
+  },
+  {
+    "Title": "Summertime '06",
+    "Artist": "Vince Staples",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27386f51d101637fd4dc59fc32a"
+  },
+  {
+    "Title": "Cupid deluxe",
+    "Artist": "Blood orange",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739d6bd2afa2987a69b7b55f72"
+  },
+  {
+    "Title": "El mar querer",
+    "Artist": "Rosalía",
+    "CoverArtURL": "https://travellercollective.com/cdn/shop/articles/original.jpg?v=1611856203"
+  },
+  {
+    "Title": "* (Blackstar)",
+    "Artist": "David Bowie",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273cf871ddf9d67bbdeb0ac6a1a"
+  },
+  {
+    "Title": "Whack world",
+    "Artist": "Tierra Whack",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273fb22c7162d3867dc3c2af466"
+  },
+  {
+    "Title": "Apocalypse",
+    "Artist": "Bill Callahan",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b6cb852f5cdb1443295484fe"
+  },
+  {
+    "Title": "Pop 2",
+    "Artist": "Charli XCX",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ec1bc2abea061f5f09fa9b64"
+  },
+  {
+    "Title": "Lemonade",
+    "Artist": "Beyoncé",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27389992f4d7d4ab94937bf9e23"
+  },
+  {
+    "Title": "New Amerykah part two : return of the Ankh",
+    "Artist": "Erykah Badu",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732c1b088d399087bd3a1de30b"
+  },
+  {
+    "Title": "Night time, my time",
+    "Artist": "Sky Ferreira",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d39843a4927d1dd474978d23"
+  },
+  {
+    "Title": "We got it from here … thank you 4 your service",
+    "Artist": "A Tribe called quest",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27389450c8e877bf04203b86819"
+  },
+  {
+    "Title": "A crow looked at me",
+    "Artist": "Mount Eerie",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e9e262c288b2e13e8f81d2ae"
+  },
+  {
+    "Title": "Shaking the habitual",
+    "Artist": "Knife",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c65c20ed27aa2877070f4eea"
+  },
+  {
+    "Title": "Emotion",
+    "Artist": "Carly Rae Jepsen",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735708b3925c13b1b8d6fac466"
+  },
+  {
+    "Title": "Hopelessness",
+    "Artist": "Anohni",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27320ef666d9a3a33c9fbc08756"
+  },
+  {
+    "Title": "Replica",
+    "Artist": "Oneohtrix point never",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735044c6e365838ad9e34f8a00"
+  },
+  {
+    "Title": "Visions",
+    "Artist": "Grimes",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273918fee4073aa392349123e63"
+  },
+  {
+    "Title": "Knock knock",
+    "Artist": "DJ Koze",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273492b40515f7b15e06df29df2"
+  },
+  {
+    "Title": "This is happening",
+    "Artist": "LCD soundsystem",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ee0d0dce888c6c8a70db6e8b"
+  },
+  {
+    "Title": "Black origami",
+    "Artist": "Jlin",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734929b9471a2914884a130393"
+  },
+  {
+    "Title": "Barter 6",
+    "Artist": "Young thug",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27388053a98d0abb8ed3a02efe1"
+  },
+  {
+    "Title": "Strange mercy",
+    "Artist": "St. Vincent",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273194059a08c20b4f39bbb31c7"
+  },
+  {
+    "Title": "Vulnicura",
+    "Artist": "Björk",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732f360c92aae18743a6bcec7e"
+  },
+  {
+    "Title": "Damn.",
+    "Artist": "Kendrick Lamar",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738b52c6b9bc4e43d873869699"
+  },
+  {
+    "Title": "The epic",
+    "Artist": "Kamasi Washington",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b89caebf56746ac0bae93ba9"
+  },
+  {
+    "Title": "Red",
+    "Artist": "Taylor Swift",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273318443aab3531a0558e79a4d"
+  },
+  {
+    "Title": "The ooz",
+    "Artist": "King Krule",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2736092861560774fe0a2354504"
+  },
+  {
+    "Title": "Arca",
+    "Artist": "Arca",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734aaf2413384c1efcc38353c6"
+  },
+  {
+    "Title": "Ruins",
+    "Artist": "Grouper",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273763effbf66f2511b6f850de6"
+  },
+  {
+    "Title": "XXX",
+    "Artist": "Danny Brown",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273615e9e91333dd9af110cd555"
+  },
+  {
+    "Title": "Be the cowboy",
+    "Artist": "Mitski",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c428f67b4a9b7e1114dfc117"
+  },
+  {
+    "Title": "Ds2",
+    "Artist": "Future",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b2592bea12d840fd096ef965"
+  },
+  {
+    "Title": "Plunge",
+    "Artist": "Fever Ray",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273206ff3a13bce646c0316b063"
+  },
+  {
+    "Title": "Sometimes I sit and think, and sometimes I just sit",
+    "Artist": "Courtney Barnett",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f16fdab2964e21d427f7c156"
+  },
+  {
+    "Title": "Cosmogramma",
+    "Artist": "Flying lotus",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2736f0c962b04f02c839726f41f"
+  },
+  {
+    "Title": "If you're reading this it's too late",
+    "Artist": "Drake",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732090f4f6cc406e6d3c306733"
+  },
+  {
+    "Title": "No shape",
+    "Artist": "Perfume genius",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738fdf12fe7f25d791a78375da"
+  },
+  {
+    "Title": "Honey",
+    "Artist": "Robyn",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27352426e8cc612c20fc7b1aad3"
+  },
+  {
+    "Title": "I love you, honeybear",
+    "Artist": "Father John Misty",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732b46da50b2cf64c6744a5e33"
+  },
+  {
+    "Title": "Invasion of privacy",
+    "Artist": "Cardi B",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a0caffda54afd0a65995bbab"
+  },
+  {
+    "Title": "Oil of every pearl's un-insides",
+    "Artist": "Sophie",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273dd1981e5860be964eff6f40a"
+  },
+  {
+    "Title": "House of balloons",
+    "Artist": "Weeknd",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273274b406a7e18acebcf743079"
+  },
+  {
+    "Title": "The suburbs",
+    "Artist": "Arcade fire",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731d6b4b0418200b6324734062"
+  },
+  {
+    "Title": "There is love in you",
+    "Artist": "Four Tet",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731c60d216c55dbf149c6ed5cb"
+  },
+  {
+    "Title": "Smoke ring for my halo",
+    "Artist": "Kurt Vile",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273560c307eeca71e7443b3b803"
+  },
+  {
+    "Title": "Currents",
+    "Artist": "Tame impala",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739e1cfc756886ac782e363d79"
+  },
+  {
+    "Title": "Syro",
+    "Artist": "Aphex twin",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2736ea96ba633bead24af562890"
+  },
+  {
+    "Title": "When I get home",
+    "Artist": "Solange",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b1150f77ae2fbf0d5b4715fc"
+  },
+  {
+    "Title": "Father, son, holy ghost",
+    "Artist": "Girls",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a7c47fbc75c03f9af7e1aa39"
+  },
+  {
+    "Title": "Rival dealer (EP)",
+    "Artist": "Burial",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27354268262b503379b9fd947d9"
+  },
+  {
+    "Title": "Acid rap",
+    "Artist": "Chance the Rapper",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735edaec1f5c672bed831533a3"
+  },
+  {
+    "Title": "On your own love again",
+    "Artist": "Jessica Pratt",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e37bbdc3e9a69cde9aa0a8db"
+  },
+  {
+    "Title": "Days are gone",
+    "Artist": "Haim",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735841140a46549b7e95202b9f"
+  },
+  {
+    "Title": "SremmLife",
+    "Artist": "Rae Sremmurd",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273881fb62d913fe712fc2e1c95"
+  },
+  {
+    "Title": "Apocalypse, girl",
+    "Artist": "Jenny Hval",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27380d9a7e2aed0b83eecfd6a97"
+  },
+  {
+    "Title": "Our love",
+    "Artist": "Caribou",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a74a119729ec1e32e5837a63"
+  },
+  {
+    "Title": "Never hungover again",
+    "Artist": "Joyce manor",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273831b901fe12744c3003ff901"
+  },
+  {
+    "Title": "22, a million",
+    "Artist": "Bon iver",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27326a351da1ea9d77a1b45dc6b"
+  },
+  {
+    "Title": "Watch the throne",
+    "Artist": "Jay-Z & Kanye West",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27370cf055d00ab1ec0290d3d5a"
+  },
+  {
+    "Title": "Devotion",
+    "Artist": "Tirzah",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273281b57bfec5391971863c05a"
+  },
+  {
+    "Title": "Contra",
+    "Artist": "Vampire weekend",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2736bdee14b4a54781336e9ea07"
+  },
+  {
+    "Title": "Leak 04-13 (bait ones)",
+    "Artist": "Jai Paul",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739d7984c7a5817cb9d64517dd"
+  },
+  {
+    "Title": "Double negative",
+    "Artist": "Low",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273886ef25208f45d485ece3181"
+  },
+  {
+    "Title": "Lost in the dream",
+    "Artist": "War on drugs",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f34338e9270f9c0561cf4c7e"
+  },
+  {
+    "Title": "It's album time",
+    "Artist": "Todd Terje",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ef57e636952c4099cf13c6b5"
+  },
+  {
+    "Title": "X100pre",
+    "Artist": "Bad bunny",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273519266cd05491a5b5bc22d1e"
+  },
+  {
+    "Title": "Sweetener",
+    "Artist": "Ariana Grande",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c3af0c2355c24ed7023cd394"
+  },
+  {
+    "Title": "Kill for love",
+    "Artist": "Chromatics",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27307946eb096b05cd23119a40e"
+  },
+  {
+    "Title": "Late nights : the album",
+    "Artist": "Jeremih",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273262c8e955ad5c60b1d0abf53"
+  },
+  {
+    "Title": "This is how you smile",
+    "Artist": "Helado negro",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273af024248f3720f031a080d60"
+  },
+  {
+    "Title": "Cerulean salt",
+    "Artist": "Waxahatchee",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739ba82cb5d9589aae0079b816"
+  },
+  {
+    "Title": "Settle",
+    "Artist": "Disclosure",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273786201dca187d2b0c956c24b"
+  },
+  {
+    "Title": "Aromanticism",
+    "Artist": "Moses Sumney",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273478d01e5e5b78a6791036e5f"
+  },
+  {
+    "Title": "Swing lo Magellan",
+    "Artist": "Dirty projectors",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27328f844b0afeeb2492be74022"
+  },
+  {
+    "Title": "99.9%",
+    "Artist": "Kaytranada",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b2f893f4215f2930e7320355"
+  },
+  {
+    "Title": "Aviary",
+    "Artist": "Julia Holter",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d96423db65c069e44d00df7a"
+  },
+  {
+    "Title": "Flockaveli",
+    "Artist": "Waka Flocka Flame",
+    "CoverArtURL": "https://i.scdn.co/image/fade577145599daff924bb7b28386a84f67bd1db"
+  },
+  {
+    "Title": "Past life martyred saints",
+    "Artist": "EMA",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27340c7f05b85afeda3c365a03e"
+  },
+  {
+    "Title": "Random access memories",
+    "Artist": "Daft punk",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739b9b36b0e22870b9f542d937"
+  },
+  {
+    "Title": "Celebration rock",
+    "Artist": "Japandroids",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d3303b3f14ccb1794aa5b21f"
+  },
+  {
+    "Title": "Process",
+    "Artist": "Sampha",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ab6b9fb78a5506e4b4d40429"
+  },
+  {
+    "Title": "In A poem unlimited",
+    "Artist": "U.S. girls",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a996850daeccfe092d6b46d7"
+  },
+  {
+    "Title": "The ArchAndroid (suites II and III of IV)",
+    "Artist": "Janelle Monáe",
+    "CoverArtURL": "https://images.squarespace-cdn.com/content/v1/5a8dbc8e90bcce50c3a4dbd4/1626401367721-XWUQZS0ZO3LJTBOBDRD5/8682244038_aa28e45a94_b.jpg?format=1000w"
+  },
+  {
+    "Title": "The money store",
+    "Artist": "Death grips",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b4f8459b0f719f8a97ee1c8c"
+  },
+  {
+    "Title": "You want it darker",
+    "Artist": "Leonard Cohen",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738fc3f01275cae3d8ecb1c26b"
+  },
+  {
+    "Title": "Before the world was big",
+    "Artist": "Girlpool",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2733ccd7821d1c1492915b9de8e"
+  },
+  {
+    "Title": "Flower boy",
+    "Artist": "Tyler, the Creator",
+    "CoverArtURL": "https://admin.itsnicethat.com/images/ESgAg6Y2f2xM_pfPIsyL0pvdQHg=/69898/format-webp%7Cwidth-2880/598196e77fa44cb08200a23e.jpg"
+  },
+  {
+    "Title": "Home, like noplace is there",
+    "Artist": "Hotelier",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273197643c54a9d245746b7d10f"
+  },
+  {
+    "Title": "Lush",
+    "Artist": "Snail mail",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732a6451bf50693f79b88e4954"
+  },
+  {
+    "Title": "Sunbather",
+    "Artist": "Deafheaven",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739ad23cad3ef037b00c1d2a20"
+  },
+  {
+    "Title": "Days",
+    "Artist": "Real estate",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ccdb9c22f07f24a773110a87"
+  },
+  {
+    "Title": "Safe in the hands of love",
+    "Artist": "Yves Tumor",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732aa5d3ca4ff3e36ccd859013"
+  },
+  {
+    "Title": "Tomboy",
+    "Artist": "Panda bear",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c500560412835b729ced7fef"
+  },
+  {
+    "Title": "Teens of denial",
+    "Artist": "Car seat headrest",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734094272fe172643edfdbba48"
+  },
+  {
+    "Title": "A moon shaped pool",
+    "Artist": "Radiohead",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27345643f5cf119cbc9d2811c22"
+  },
+  {
+    "Title": "Bangs & works : vol. 1 A Chicago footwork compilation",
+    "Artist": "Various Artists",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27333d98ab5f685dcf4a302329b"
+  },
+  {
+    "Title": "Lonerism",
+    "Artist": "Tame impala",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273370c12f82872c9cfaee80193"
+  },
+  {
+    "Title": "Run the jewels 2",
+    "Artist": "Run the jewels",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739742a327795c8c656d4c436d"
+  },
+  {
+    "Title": "Freedom",
+    "Artist": "Amen Dunes",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d33caf0bbb67374d119c2142"
+  },
+  {
+    "Title": "Zentropy",
+    "Artist": "Frankie Cosmos",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27308d73d51c742e1e0cf6c71c1"
+  },
+  {
+    "Title": "Hurry up we're dreaming!",
+    "Artist": "M83",
+    "CoverArtURL": "https://www.treblezine.com/wp-content/uploads/2011/10/m83-hurry-up-were-dreaming.jpg.webp"
+  },
+  {
+    "Title": "Helplessness blues",
+    "Artist": "Fleet foxes",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27375ff22a37b0cc0381d11c2c1"
+  },
+  {
+    "Title": "Ravedeath, 1972",
+    "Artist": "Tim Hecker",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273dd3e6ebb68966851e511f350"
+  },
+  {
+    "Title": "LIVE.LOVE.A$AP",
+    "Artist": "A$AP Rocky",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c8ced8a4d6b6b61eb592f3dd"
+  },
+  {
+    "Title": "Sound & color",
+    "Artist": "Alabama shakes",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d5abe87cecc0f78512973a57"
+  },
+  {
+    "Title": "Does it look like I'm here?",
+    "Artist": "Emeralds",
+    "CoverArtURL": "https://f4.bcbits.com/img/a3209613813_10.jpg"
+  },
+  {
+    "Title": "Sunbathing animal",
+    "Artist": "Parquet courts",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b49d90ec9aeac80c596c6bfd"
+  },
+  {
+    "Title": "Rich forever",
+    "Artist": "Rick Ross",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732bf05f329d2918345e1c5a5b"
+  },
+  {
+    "Title": "Agora",
+    "Artist": "Fennesz",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27328f17d47111d8b2514b26a37"
+  },
+  {
+    "Title": "Titanic rising",
+    "Artist": "Weyes blood",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730c64e752dec4c08362cc4a88"
+  },
+  {
+    "Title": "Let England shake",
+    "Artist": "PJ Harvey",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730682f13c108d0aa9fb3a7e7a"
+  },
+  {
+    "Title": "Finally rich",
+    "Artist": "Chief keef",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a76616abf60ce17491e95891"
+  },
+  {
+    "Title": "Compilation",
+    "Artist": "Sheer mag",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731e954b69fb5a3fae1ca63d06"
+  },
+  {
+    "Title": "High violet",
+    "Artist": "National",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734fb2bd6896a902c5432a6de5"
+  },
+  {
+    "Title": "Space is only noise",
+    "Artist": "Nicholas Jaar",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d3833ab3efc36b1559acb3e7"
+  },
+  {
+    "Title": 2,
+    "Artist": "Mac DeMarco",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739d377496c6bc8724b521222d"
+  },
+  {
+    "Title": "Playboi Carti",
+    "Artist": "Playboi Carti",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e31a279d267f3b3d8912e6f1"
+  },
+  {
+    "Title": "The fame monster",
+    "Artist": "Lady Gaga",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735c9890c0456a3719eeecd8aa"
+  },
+  {
+    "Title": "AM",
+    "Artist": "Arctic monkeys",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734ae1c4c5c45aabe565499163"
+  },
+  {
+    "Title": "Purple mountains",
+    "Artist": "Purple mountains",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27388cea355ba046594ed548eff"
+  },
+  {
+    "Title": "Under the skin (soundtrack)",
+    "Artist": "Mica Levi",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f3001ba98d3e609f21d3f733"
+  },
+  {
+    "Title": "Savage mode",
+    "Artist": "21 Savage/Metro boomin",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732dd1ac4a61495080ef8f78ca"
+  },
+  {
+    "Title": "The voyager",
+    "Artist": "Jenny Lewis",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273db0c45ed72295e906b0f5847"
+  },
+  {
+    "Title": "A brief inquiry into online relationships",
+    "Artist": "The 1975",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2736c582022e90b11f0da287a9a"
+  },
+  {
+    "Title": "Treats",
+    "Artist": "Sleigh bells",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e1d8ed663a5575b0d1f35b62"
+  },
+  {
+    "Title": "Foundations of burden",
+    "Artist": "Pallbearer",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273feda2ce0288247c0a9ccfe8e"
+  },
+  {
+    "Title": "Room 25",
+    "Artist": "Noname",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f65df5cd2490bff182ddd2fd"
+  },
+  {
+    "Title": "I like it when you sleep for you are beautiful yet so unaware of it",
+    "Artist": "The 1975",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273206517a3f7e4c34bf0bfc531"
+  },
+  {
+    "Title": "Metamodern sounds in country music",
+    "Artist": "Sturgill Simpson",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27394492c13b4deaf9e1def36dc"
+  },
+  {
+    "Title": "Dreamchasers 2",
+    "Artist": "Meek Mill",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2733e1a2db813bd01027106e470"
+  },
+  {
+    "Title": "Painted shut",
+    "Artist": "Hop along",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273624cd36769c2d14669fa448c"
+  },
+  {
+    "Title": "Everybody works",
+    "Artist": "Jay Som",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273cf71c6b8b9ed191607740fba"
+  },
+  {
+    "Title": "The pinkprint",
+    "Artist": "Nicki Minaj",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731e0a93db928b32f1992fd3e8"
+  },
+  {
+    "Title": "DSU",
+    "Artist": "Alex G",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27336e8d1baf6fd39588431d012"
+  },
+  {
+    "Title": "The magic place",
+    "Artist": "Julianna Barwick",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27327d5b6fe03ab15429b471aa3"
+  },
+  {
+    "Title": "After laughter",
+    "Artist": "Paramore",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273dbd83e179619408e5d05cc99"
+  },
+  {
+    "Title": "Compro",
+    "Artist": "Skee mask",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b5658daa8f91e2c40d00581b"
+  },
+  {
+    "Title": "Veteran",
+    "Artist": "Jpegmafia",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f8aaeba5e6dee1745371e822"
+  },
+  {
+    "Title": "Where we come from",
+    "Artist": "Popcaan",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731f3827ae627e831883bf0f7f"
+  },
+  {
+    "Title": "Small town heroes",
+    "Artist": "Hurray for the Riff Raff",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a7521c4afde6cc8650bfc7c2"
+  },
+  {
+    "Title": "Are we there",
+    "Artist": "Sharon van Etten",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27321e7e202974e7d0ee0ec4e60"
+  },
+  {
+    "Title": "Devotion",
+    "Artist": "Jessie Ware",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f828e42a7fb795ef00c8425d"
+  },
+  {
+    "Title": "I'm new here",
+    "Artist": "Gil Scott-Heron",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273db342ef731f061a91c55f81c"
+  },
+  {
+    "Title": "All American made",
+    "Artist": "Margo Price",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27302476f097fd8a49e00f1959c"
+  },
+  {
+    "Title": "Silence yourself",
+    "Artist": "Savages",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739f2c6f490a2d5457cf470e20"
+  },
+  {
+    "Title": "Black up",
+    "Artist": "Shabazz palaces",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273eb1131dabe75ee956adae913"
+  },
+  {
+    "Title": "The bones of what you believe",
+    "Artist": "Chvrches",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b9c9a04a494c57de38ca4c3f"
+  },
+  {
+    "Title": "Legacy! Legacy!",
+    "Artist": "Jamila Woods",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e47744ece1bb54c123592f24"
+  },
+  {
+    "Title": "Trans day of revenge",
+    "Artist": "G.L.O.S.S.",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273772902a90d3eda27864b83b5"
+  },
+  {
+    "Title": "American drift",
+    "Artist": "Elysia Crampton",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737161802b0caf72d8ab18c92f"
+  },
+  {
+    "Title": "Clean",
+    "Artist": "Soccer mommy",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735b3865880c7946fd6283db25"
+  },
+  {
+    "Title": "Lala belu",
+    "Artist": "Hailu Mergia",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737f678f8aca36a50d3b77509c"
+  },
+  {
+    "Title": "Mono no aware",
+    "Artist": "Various Artists",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735eef4a5a0481a08f2cf993c3"
+  },
+  {
+    "Title": "Beyondless",
+    "Artist": "Iceage",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734e20241459d559f089909566"
+  },
+  {
+    "Title": "Daytona",
+    "Artist": "Pusha T",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273263555eebbe2b375593aa31e"
+  },
+  {
+    "Title": "The weight of these wings",
+    "Artist": "Miranda Lambert",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27357853d228f4dcdbb08df7a9c"
+  },
+  {
+    "Title": "For those of you who have never (and also those who have)",
+    "Artist": "Huerco S",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e405190f73746b94c2d23c13"
+  },
+  {
+    "Title": "50 words for snow",
+    "Artist": "Kate Bush",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27386e11953f61897738f832b5d"
+  },
+  {
+    "Title": "Cut 4 me",
+    "Artist": "Kelela",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e5d97c29a17c5a205f2ecbdf"
+  },
+  {
+    "Title": "Hellboy",
+    "Artist": "Lil Peep",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27342ddc1ea9a4e592d994bc014"
+  },
+  {
+    "Title": "The monitor",
+    "Artist": "Titus Andronicus",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273bdde17bf13ba66ccb3d0bcb0"
+  },
+  {
+    "Title": "Full communism",
+    "Artist": "Downtown boys",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273408678c0d122505bf07885c4"
+  },
+  {
+    "Title": "Vexovoid",
+    "Artist": "Portal",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c60e97e5679057eec42e418f"
+  },
+  {
+    "Title": "Genre-specific xperience",
+    "Artist": "Fatima Al Qadiri",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734fb334311803669bbcc73b05"
+  },
+  {
+    "Title": "Everything's fine",
+    "Artist": "Jean Grae & Quelle Chris",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732b579bdc98f2d00c4311b8b6"
+  },
+  {
+    "Title": "Go tell fire to the mountain",
+    "Artist": "Wu lyf",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c6f2e4bea8f082678ffdbbf1"
+  },
+  {
+    "Title": "So it goes",
+    "Artist": "Ratking",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27313fd01a2274819fe6d19c6ea"
+  },
+  {
+    "Title": "Fetch the bolt cutters",
+    "Artist": "Fiona Apple",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273841292c1316c4bf85447bcd9"
+  },
+  {
+    "Title": "Saint Cloud",
+    "Artist": "Waxahatchee",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737a85df5e8a9276793d1373e1"
+  },
+  {
+    "Title": "Grae",
+    "Artist": "Moses Sumney",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739fae32dee0795dd49dc5b63a"
+  },
+  {
+    "Title": "Punisher",
+    "Artist": "Phoebe Bridgers",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a91b75c9ef65ed8d760ff600"
+  },
+  {
+    "Title": "Set my heart on fire immediately",
+    "Artist": "Perfume genius",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27343f44b90dd0a223b06aba994"
+  },
+  {
+    "Title": "Rough and rowdy ways",
+    "Artist": "Bob Dylan",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273de53828a4a84a66179dcdfde"
+  },
+  {
+    "Title": "Heaven to a tortured mind",
+    "Artist": "Yves Tumor",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273bb8648acba5bbab771ef0a45"
+  },
+  {
+    "Title": "Women in music : pt III",
+    "Artist": "Haim",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273667f8cfd1be0d0cc2b825e25"
+  },
+  {
+    "Title": "What's your pleasure?",
+    "Artist": "Jessie Ware",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273685c8bba80598fbc5636cd39"
+  },
+  {
+    "Title": "Yhlqmdlg",
+    "Artist": "Bad bunny",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273548f7ec52da7313de0c5e4a0"
+  },
+  {
+    "Title": "Instrumentals",
+    "Artist": "Adrianne Lenker",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27399214ab8525fb647768717d8"
+  },
+  {
+    "Title": "Songs",
+    "Artist": "Adrianne Lenker",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ab009ce861613653b14451b9"
+  },
+  {
+    "Title": "Eternal atake",
+    "Artist": "Lil Uzi Vert",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27309969f5c11a466d0e459286a"
+  },
+  {
+    "Title": "Microphones in 2020",
+    "Artist": "Microphones",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273454bdf2be88e39acaa050bb4"
+  },
+  {
+    "Title": "Act II: the patents of nobility (the turn)",
+    "Artist": "Jay Electronica",
+    "CoverArtURL": "https://i1.sndcdn.com/artworks-9HwLmzhebSJe2yjn-6R1aNA-t500x500.jpg"
+  },
+  {
+    "Title": "Heavy light",
+    "Artist": "U.S. girls",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a8d34511decbfe1d69231a3a"
+  },
+  {
+    "Title": "RTJ4",
+    "Artist": "Run the jewels",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273368d8cbae3f7dbacfee4e617"
+  },
+  {
+    "Title": "Roísín machine",
+    "Artist": "Roísín Murphy",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ce3fd3e69297d50af31bf18d"
+  },
+  {
+    "Title": "Have we met",
+    "Artist": "Destroyer",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737eb4952fd8657d332f2e34e3"
+  },
+  {
+    "Title": "The angel you don't know",
+    "Artist": "Amaarae",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737f3dc1221620c8e0921cb6f3"
+  },
+  {
+    "Title": "Shore",
+    "Artist": "Fleet foxes",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734908c0ea9f3884cee21e85c1"
+  },
+  {
+    "Title": "Future nostalgia",
+    "Artist": "Dua Lipa",
+    "CoverArtURL": "https://m.media-amazon.com/images/I/71VQFsqlPJL.jpg"
+  },
+  {
+    "Title": "Forever, ya girl",
+    "Artist": "KeiyaA",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2733151bc18d9c4b183692aae02"
+  },
+  {
+    "Title": "Every bad",
+    "Artist": "Porridge radio",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731ebd04b31cac36941c1be994"
+  },
+  {
+    "Title": "Miss Anthropocene",
+    "Artist": "Grimes",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731a302aafa2ea587960e27951"
+  },
+  {
+    "Title": "Source",
+    "Artist": "Nubya Garcia",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d52e831a699e7635bcb56c4c"
+  },
+  {
+    "Title": "Color theory",
+    "Artist": "Soccer mommy",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c330e261afcd6e0ae256f3aa"
+  },
+  {
+    "Title": "Inner song",
+    "Artist": "Kelly Lee Owens",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273810e1556b6a181808d21090f"
+  },
+  {
+    "Title": "Ungodly hour",
+    "Artist": "Chloe x Halle",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2736258cd821d868e64b74e44a5"
+  },
+  {
+    "Title": "Folklore",
+    "Artist": "Taylor Swift",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27395f754318336a07e85ec59bc"
+  },
+  {
+    "Title": "Live forever",
+    "Artist": "Bartees Strange",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f8b3fd1dfde99e7e09b4e678"
+  },
+  {
+    "Title": "Shall we go on sinning so that grace may increase?",
+    "Artist": "Soft pink truth",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2736b2282eb3feec8103c3d973e"
+  },
+  {
+    "Title": "Thank you for using GTL",
+    "Artist": "Drakeo the Ruler",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732908feedf5f7fdf2c6e57947"
+  },
+  {
+    "Title": "Workaround",
+    "Artist": "Beatrice Dillon",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273728077cceba2fc581b20c476"
+  },
+  {
+    "Title": "Melee",
+    "Artist": "Dogleg",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273aaff5fcbf959ad29b6e576d9"
+  },
+  {
+    "Title": "Descendants of Cain",
+    "Artist": "Ka",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d403eff090dfe3be01debfc8"
+  },
+  {
+    "Title": "The passion of",
+    "Artist": "Special interest",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c6fc1c69fd9d0795b2c65eb7"
+  },
+  {
+    "Title": "Hannah",
+    "Artist": "Lomelda",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c979ea1494139b3704bd362b"
+  },
+  {
+    "Title": "Help",
+    "Artist": "Duval Timothy",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2733da64d8106f3ec88f648c5f1"
+  },
+  {
+    "Title": "Flower of devotion",
+    "Artist": "Dehd",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730fd4b359cf4f5dd96b7130fd"
+  },
+  {
+    "Title": "Kick i",
+    "Artist": "Arca",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f9e8f3f889a24247b88cc4a2"
+  },
+  {
+    "Title": "Sawayama",
+    "Artist": "Rina Sawayama",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735b131d745dafd8666254fe96"
+  },
+  {
+    "Title": "Room for the moon",
+    "Artist": "Kate NV",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27381375a803a622e1915b61ac5"
+  },
+  {
+    "Title": "Good news",
+    "Artist": "Megan thee Stallion",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273da256972582b455d46985ba9"
+  },
+  {
+    "Title": "Agora",
+    "Artist": "Bebel Gilberto",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a2791dfa410a4fae64f1a2f9"
+  },
+  {
+    "Title": "Fountain",
+    "Artist": "Lyra Pramuk",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273637eb02ed9d55a96d2e17b71"
+  },
+  {
+    "Title": "Twice as tall",
+    "Artist": "Burna Boy",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b7f8830b83e6a6628f536942"
+  },
+  {
+    "Title": "My turn : deluxe",
+    "Artist": "Lil Baby",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27376a4577dd654bf457a4ad1f8"
+  },
+  {
+    "Title": "How I'm feeling now",
+    "Artist": "Charli XCX",
+    "CoverArtURL": "https://images.genius.com/e618acfa672295153b4a390066c58576.1000x1000x1.png"
+  },
+  {
+    "Title": "What we drew",
+    "Artist": "Yaeji",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731243e4a5b3cee3d6d1c6719e"
+  },
+  {
+    "Title": "Silver ladders",
+    "Artist": "Mary Lattimore",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27311330d1deab4d73d2fdc7065"
+  },
+  {
+    "Title": "Heaux tales",
+    "Artist": "Jazmine Sullivan",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737955a7d9d5998317da3fbb04"
+  },
+  {
+    "Title": "Fatigue",
+    "Artist": "L'Rain",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273393d81ee15f3164dd5bc545d"
+  },
+  {
+    "Title": "Call me if you get lost",
+    "Artist": "Tyler, the Creator",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273696b4e67423edd64784bfbb4"
+  },
+  {
+    "Title": "Promises",
+    "Artist": "Floating points, Pharaoh Sanders",
+    "CoverArtURL": "https://m.media-amazon.com/images/I/71RAKFdRpML._AC_UF1000,1000_QL80_.jpg"
+  },
+  {
+    "Title": "Hey what",
+    "Artist": "Low",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e623d924c7d54a98e97e0898"
+  },
+  {
+    "Title": "Glow on",
+    "Artist": "Turnstile",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a4499cf37a6fe4ff043dc9f2"
+  },
+  {
+    "Title": "Ignorance",
+    "Artist": "Weather station",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ec01f5a2f56180b6f6b634ec"
+  },
+  {
+    "Title": "Afrique victime",
+    "Artist": "Mdou Moctar",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732823175f79bbdfaa2bb7c056"
+  },
+  {
+    "Title": "Whole lotta red",
+    "Artist": "Playboi Carti",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27398ea0e689c91f8fea726d9bb"
+  },
+  {
+    "Title": "New long leg",
+    "Artist": "Dry cleaning",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f206f7d3727972b3b7268faa"
+  },
+  {
+    "Title": "I know I'm funny haha",
+    "Artist": "Faye Webster",
+    "CoverArtURL": "https://media.pitchfork.com/photos/60880dae9080feb0f2eb322e/1:1/w_2000,h_2000,c_limit/Faye-Webster.jpg"
+  },
+  {
+    "Title": "Vulture prince",
+    "Artist": "Arooj Aftab",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273fd247739c6b3bb01aec1c689"
+  },
+  {
+    "Title": "Colourgrade",
+    "Artist": "Tirzah",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a2a78c39fdf06843e9f31458"
+  },
+  {
+    "Title": "Jubilee",
+    "Artist": "Japanese breakfast",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e58724521fe7e84276b4c373"
+  },
+  {
+    "Title": "Valentine",
+    "Artist": "Snail mail",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e5217d54e15ea32912dbc06b"
+  },
+  {
+    "Title": "Disco!",
+    "Artist": "Mike",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273bf6105c3517bd6d6e7aff6f9"
+  },
+  {
+    "Title": "An overview on phenomenal nature",
+    "Artist": "Cassandra Jenkins",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273948953438f5c2806df2948e7"
+  },
+  {
+    "Title": "Shade",
+    "Artist": "Grouper",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f77e76cce7a2e1adf48b0394"
+  },
+  {
+    "Title": "Black metal 2",
+    "Artist": "Dean Blunt",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ad24c5e36ddcd1957ad35677"
+  },
+  {
+    "Title": "Pray for Haiti",
+    "Artist": "Mach-hommy",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c43b3a9459cadcf6f68867cd"
+  },
+  {
+    "Title": "Sour",
+    "Artist": "Olivia Rodrigo",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a91c10fe9472d9bd89802e5a"
+  },
+  {
+    "Title": "Second line : an electro revival",
+    "Artist": "Dawn Richard",
+    "CoverArtURL": "https://images.genius.com/261906cd94dbd07265fc82938bf6b2d4.1000x1000x1.jpg"
+  },
+  {
+    "Title": "Cavalcade",
+    "Artist": "Black midi",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b04164c2bd3f286989ab7c5e"
+  },
+  {
+    "Title": "Any shape you take",
+    "Artist": "Indigo de Souza",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738be26b6c162ff72ca4666ba6"
+  },
+  {
+    "Title": "Space 1.8",
+    "Artist": "Nala Sinephro",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27399e60c06162fd5cb1ff6d0b8"
+  },
+  {
+    "Title": "Haram",
+    "Artist": "Armand Hammer and the Alchemist",
+    "CoverArtURL": "https://spectrumculture.com/wp-content/uploads/2021/05/haram.jpg"
+  },
+  {
+    "Title": "Black encyclopedia of the air",
+    "Artist": "Moor mother",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739ed91d9545c5debf8083211f"
+  },
+  {
+    "Title": "Entertainment, Death",
+    "Artist": "Spirit of the beehive",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a6cf7385d53e46d9deb71d5a"
+  },
+  {
+    "Title": "Sometimes I might be introvert",
+    "Artist": "Little Simz",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273aede85ed28c2237a33b63dba"
+  },
+  {
+    "Title": "A softer focus",
+    "Artist": "Claire Rousay",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273aa20340bca1e8b3b88a6bde2"
+  },
+  {
+    "Title": "Half God",
+    "Artist": "Wiki",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d0cfa4dd7b3ca635b0d6cc19"
+  },
+  {
+    "Title": 30,
+    "Artist": "Adele",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c6b577e4c4a6d326354a89f7"
+  },
+  {
+    "Title": "Una rosa",
+    "Artist": "Xenia Rubinos",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27336514e9d30413c72de123c13"
+  },
+  {
+    "Title": "I don't live here anymore",
+    "Artist": "War on drugs",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a76b94318060d0e4927a5d77"
+  },
+  {
+    "Title": "Let me do one more",
+    "Artist": "Illuminati hotties",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738d7782480aeb03ef824420d1"
+  },
+  {
+    "Title": "Menneskekollektivet",
+    "Artist": "Lost girls",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27349591a97d99a177792bb6fb6"
+  },
+  {
+    "Title": "Established!",
+    "Artist": "RP Boo",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a2dfcc1edde0e8944155d32d"
+  },
+  {
+    "Title": "Song of sage : post panic!",
+    "Artist": "Navy Blue",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735a973167d72dfaaedf82a654"
+  },
+  {
+    "Title": "Reflection",
+    "Artist": "Loraine James",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732264bd48553b66b99ceed103"
+  },
+  {
+    "Title": "Sensational",
+    "Artist": "Erika de Casier",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273be01bb14b4a7742e9885eb64"
+  },
+  {
+    "Title": "Sinner get ready",
+    "Artist": "Lingua Ignota",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27313b45fe30d1afd2e909fa410"
+  },
+  {
+    "Title": "Uneasy",
+    "Artist": "Vijay Iyer",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27356548f12ada07ffc437c72a7"
+  },
+  {
+    "Title": "Fun house",
+    "Artist": "Hand habits",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273fa04857b8296b2b2a267d861"
+  },
+  {
+    "Title": "Fresia Magdalena (EP)",
+    "Artist": "Sofia Kourtesis",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273cad80f5ebd3a2f63ceb8cc62"
+  },
+  {
+    "Title": "Im hole",
+    "Artist": "Aya",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273507f60f24b382edc1e570812"
+  },
+  {
+    "Title": "Far in",
+    "Artist": "Helado Negro",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273944f7254c299830e996dbd06"
+  },
+  {
+    "Title": "Frailty",
+    "Artist": "Dltzk (Jane Remover)",
+    "CoverArtURL": "https://media.pitchfork.com/photos/618e6eeb7909bb4eadeda40b/master/pass/Dltzk-Frailty.jpeg"
+  },
+  {
+    "Title": "A martyr's reward",
+    "Artist": "Ka",
+    "CoverArtURL": "https://media.pitchfork.com/photos/611a0c5b2e6ab45c3c87dc53/master/pass/Ka-A-Martyrs-Reward-1628874164.jpeg"
+  },
+  {
+    "Title": "Mercurial world",
+    "Artist": "Magdalena bay",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730ecbdac77e72dc16719a3e89"
+  },
+  {
+    "Title": "Urban driftwood",
+    "Artist": "Yasmin Williams",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732536574e701d92fa7eaa39e6"
+  },
+  {
+    "Title": "Renaissance",
+    "Artist": "Beyoncé",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730e58a0f8308c1ad403d105e7"
+  },
+  {
+    "Title": "Natural brown prom queen",
+    "Artist": "Sudan archives",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739c351edcaee4de7d242e7aea"
+  },
+  {
+    "Title": "Blue Rev",
+    "Artist": "Alvvays",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738f1ebf73130fc32aa3bf2b06"
+  },
+  {
+    "Title": "Endure",
+    "Artist": "Special interest",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27332c9ec838067b56c1a1049a8"
+  },
+  {
+    "Title": "Un verano sin ti",
+    "Artist": "Bad bunny",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27349d694203245f241a1bcaa72"
+  },
+  {
+    "Title": "Motomami",
+    "Artist": "Rosalía",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730c179967a265de0fc76382fe"
+  },
+  {
+    "Title": "Dragon new warm mountain I believe in you",
+    "Artist": "Big thief",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2739ec66d199c19d227f5c37a68"
+  },
+  {
+    "Title": "Ay!",
+    "Artist": "Lucrecia Dalt",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ddf7703254e235294a0e2c12"
+  },
+  {
+    "Title": "Remember your North star",
+    "Artist": "Yaya Bey",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ab5a8aff6c7b84d3d5534584"
+  },
+  {
+    "Title": "God save the animals",
+    "Artist": "Alex G",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735cce078fbf09bbe8211caf12"
+  },
+  {
+    "Title": "Dawn FM",
+    "Artist": "Weeknd",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734ab2520c2c77a1d66b9ee21d"
+  },
+  {
+    "Title": "Fossora",
+    "Artist": "Björk",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273caeb9b55b6a71df6a3897655"
+  },
+  {
+    "Title": "Mr. Morale & the Big steppers",
+    "Artist": "Kendrick Lamar",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732e02117d76426a08ac7c174f"
+  },
+  {
+    "Title": "janky star",
+    "Artist": "Grace Ives",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27317a7217a4ec88a9d15594eed"
+  },
+  {
+    "Title": "I love you Jennifer B",
+    "Artist": "Jockstrap",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27342d0304232c61d1530b40ca1"
+  },
+  {
+    "Title": "Painless",
+    "Artist": "Nilüfer Yanya",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273dbd14952cb88cd61fd7e0ffa"
+  },
+  {
+    "Title": "Sick!",
+    "Artist": "Earl Sweatshirt",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27382397f3b9fe5e010d82755c6"
+  },
+  {
+    "Title": "In these times",
+    "Artist": "Makaya McCraven",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273557019f413f7fdcd897772cd"
+  },
+  {
+    "Title": "Crash",
+    "Artist": "Charli XCX",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273086ca574430eaa107d3e855f"
+  },
+  {
+    "Title": "Pompeii",
+    "Artist": "Cate Le Bon",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27361ea5f5dad6699eafd00b71f"
+  },
+  {
+    "Title": "A light for attracting attention",
+    "Artist": "Smile",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273423ac018d0ec2301e40948a0"
+  },
+  {
+    "Title": "Topical dancer",
+    "Artist": "Charlotte Adigéry & Bolis Pupul",
+    "CoverArtURL": "https://f4.bcbits.com/img/a1903846197_16.jpg"
+  },
+  {
+    "Title": "Weather alive",
+    "Artist": "Beth Orton",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e4a5e603382192041251dadb"
+  },
+  {
+    "Title": "Caprisongs",
+    "Artist": "FKA Twigs",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a1a30cf13d406a0d5d33ae53"
+  },
+  {
+    "Title": "Cherry",
+    "Artist": "Daphni",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273566c140317cfa7bc1a0ef3df"
+  },
+  {
+    "Title": "Ugly season",
+    "Artist": "Perfume genius",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27364c177a8bd35014acce7520e"
+  },
+  {
+    "Title": "Florist",
+    "Artist": "Florist",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738dbf0609d598d97113c7030a"
+  },
+  {
+    "Title": "Aethiopes",
+    "Artist": "Billy Woods",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734f8a28641c1969557280ef9f"
+  },
+  {
+    "Title": "Heaven come crashing",
+    "Artist": "Rachika Nayar",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27339bd8602f6140aceeccd36dc"
+  },
+  {
+    "Title": "Labyrinthitis",
+    "Artist": "Destroyer",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27320ca1ad7fd1a04a17d3075ac"
+  },
+  {
+    "Title": "Badモード",
+    "Artist": "Utada Hikaru",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2736b6652f833b0a2d5569932ba"
+  },
+  {
+    "Title": "Hypnos",
+    "Artist": "Ravyn Lenae",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a2a1ffef42c5c2ba1eb8c9a5"
+  },
+  {
+    "Title": "Being funny in a foreign language",
+    "Artist": "The 1975",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731f44db452a68e229650a302c"
+  },
+  {
+    "Title": "Laughing so hard, it hurts",
+    "Artist": "Mavi",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ee78446a9cbf2cc334341782"
+  },
+  {
+    "Title": "Boat songs",
+    "Artist": "MJ Lenderman",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2733000e6ece6d7798032fbc009"
+  },
+  {
+    "Title": "Diaspora problems",
+    "Artist": "Soul glo",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f0d7c2b2353888a0a706dfcb"
+  },
+  {
+    "Title": "And in the darkness, hearts aglow",
+    "Artist": "Weyes blood",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273db8ab490bcedb6e518c37e6e"
+  },
+  {
+    "Title": "Plonk",
+    "Artist": "Huerco S",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735a41923f5bbd81e271f9515a"
+  },
+  {
+    "Title": "God's country",
+    "Artist": "Chat pile",
+    "CoverArtURL": "https://media.pitchfork.com/photos/62e16ddcd957e7e2565b5d7f/master/w_1280%2Cc_limit/Chat-Pile-Gods-Country.jpg"
+  },
+  {
+    "Title": "Classic objects",
+    "Artist": "Jenny Hval",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731d0a678963d9de47c391feb8"
+  },
+  {
+    "Title": "Shebang",
+    "Artist": "Oren Ambarchi",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27344b19059a6074c23754deb39"
+  },
+  {
+    "Title": "Nothing to declare",
+    "Artist": "700 Bliss",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27363a2ded06a7837dfb02d98ae"
+  },
+  {
+    "Title": "Laurel hell",
+    "Artist": "Mitski",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d8041a531487d0e0e4cfb41f"
+  },
+  {
+    "Title": "Three dimensions deep",
+    "Artist": "Amber Mark",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e22dbd4ab26afe8fc3901d70"
+  },
+  {
+    "Title": "Sometimes, forever",
+    "Artist": "Soccer mommy",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273af4f070d3683d9b5027059ab"
+  },
+  {
+    "Title": "Kick iii",
+    "Artist": "Arca",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734d8cf86a052ca229b2f72f14"
+  },
+  {
+    "Title": "Expert in a dying field",
+    "Artist": "Beths",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27342185bc39407adc74a39212a"
+  },
+  {
+    "Title": "Forfolks",
+    "Artist": "Jeff Parker",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c6aadf6bbc8395cf368e8afc"
+  },
+  {
+    "Title": "Ants from up there",
+    "Artist": "Black country, new road",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273af2d88c14cb157d6b851dbb3"
+  },
+  {
+    "Title": "Pripyat",
+    "Artist": "Marina Herlop",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273eeb829fcce2257b4d35bcfb6"
+  },
+  {
+    "Title": "SOS",
+    "Artist": "SZA",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737f5a318e3ff35defa8d0e4af"
+  },
+  {
+    "Title": "Desire, I want to turn into you",
+    "Artist": "Caroline Polachek",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273de17893c581b6f4fbeba51e1"
+  },
+  {
+    "Title": "Maps",
+    "Artist": "Billy Woods & Kenny Segal",
+    "CoverArtURL": "https://media.pitchfork.com/photos/64219eea733db37471fda995/master/w_1280%2Cc_limit/billy-woods-Kenny-Segal-Maps.jpg"
+  },
+  {
+    "Title": "Rat saw God",
+    "Artist": "Wednesday",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731f60aa4b591ebe1863cf5681"
+  },
+  {
+    "Title": "Erotic probiotic 2",
+    "Artist": "Nourished by time",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b4d70e6bb27ca678e541c224"
+  },
+  {
+    "Title": "Javelin",
+    "Artist": "Sufjan Stevens",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27332a8498ea892ccd4fcf3f6cf"
+  },
+  {
+    "Title": "Fountain baby",
+    "Artist": "Amaarae",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c8ddabbbb56597f7f1fc6828"
+  },
+  {
+    "Title": "Radical romantics",
+    "Artist": "Fever Ray",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273bc9eb1b749ca14a81671d4b2"
+  },
+  {
+    "Title": "My back was a bridge for you to cross",
+    "Artist": "Anohni and the Johnsons",
+    "CoverArtURL": "https://media.pitchfork.com/photos/64637f49cf439109f97df401/master/pass/Anohni.jpg"
+  },
+  {
+    "Title": "Softscars",
+    "Artist": "Yeule",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27316025492336e8584d8b77768"
+  },
+  {
+    "Title": "Did you know that there's a tunnel under Ocean blvd",
+    "Artist": "Lana Del Rey",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27359ae8cf65d498afdd5585634"
+  },
+  {
+    "Title": "I killed your dog",
+    "Artist": "L'Rain",
+    "CoverArtURL": "https://imagescdn.juno.co.uk/full/CS972022-01A-BIG.jpg"
+  },
+  {
+    "Title": "Sundial",
+    "Artist": "Noname",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2736e2a480f32d1825bbd89fc07"
+  },
+  {
+    "Title": "Guts",
+    "Artist": "Olivia Rodrigo",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e85259a1cae29a8d91f2093d"
+  },
+  {
+    "Title": "With a hammer",
+    "Artist": "Yaeji",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273df9d3f8db0e7730c9a15565b"
+  },
+  {
+    "Title": "The record",
+    "Artist": "Boygenius",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27343fc02bcfa7cd4e6bb66aa22"
+  },
+  {
+    "Title": "Raven",
+    "Artist": "Kelela",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737bdf7574663dff38e1757037"
+  },
+  {
+    "Title": "10.000 Gecs",
+    "Artist": "100 Gecs",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27323c7a7224c1378fc3e6427cb"
+  },
+  {
+    "Title": "Why does the Earth give us people to love?",
+    "Artist": "Kara Jackson",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273ddcca64eceb4a2e82daa91ba"
+  },
+  {
+    "Title": "I've seen a way",
+    "Artist": "Mandy, Indiana",
+    "CoverArtURL": "https://f4.bcbits.com/img/a2760412963_10.jpg"
+  },
+  {
+    "Title": "The greater wings",
+    "Artist": "Julie Byrne",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273577596ff584169f2b31f969c"
+  },
+  {
+    "Title": "That! Feels good!",
+    "Artist": "Jessie Ware",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f3a0088f5fc645693815c8ef"
+  },
+  {
+    "Title": "The land is inhospitable and so are we",
+    "Artist": "Mitski",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27334f21d3047d85440dfa37f10"
+  },
+  {
+    "Title": "Madres",
+    "Artist": "Sofia Kourtesis",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b43ed0051e05411a9da2bc8e"
+  },
+  {
+    "Title": "Love in exile",
+    "Artist": "Arooj Aftab, Vijay Iyer & Shahzad Ismaily",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2737c566fb2581d6340a672eca1"
+  },
+  {
+    "Title": "Atlas",
+    "Artist": "laurel Halo",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273fc2c91a44166dcd904788a84"
+  },
+  {
+    "Title": "Everyone's crushed",
+    "Artist": "Water from your eyes",
+    "CoverArtURL": "https://media.pitchfork.com/photos/63fcdcc4f530dec2c4f62820/master/w_1280%2Cc_limit/Water-From-Your-Eyes-Everyones-Crushed.jpg"
+  },
+  {
+    "Title": "Fly or die or die fly or die (World War)",
+    "Artist": "Jaimie Branch",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2733b3d8c5a568daaa68130b913"
+  },
+  {
+    "Title": "Détwat",
+    "Artist": "HiTech",
+    "CoverArtURL": "https://media.pitchfork.com/photos/646f5df2c68c240e48c0a07f/master/pass/HiTech-Detwat.jpg"
+  },
+  {
+    "Title": "Avalon Emerson & the Charm",
+    "Artist": "Avalon Emerson",
+    "CoverArtURL": "https://media.pitchfork.com/photos/63ff5f23fd62a0e462ee81b3/master/pass/Avalon-Emerson-and-the-Charm.jpg"
+  },
+  {
+    "Title": "Praise a Lord who chews but which does not consume",
+    "Artist": "Yves Tumor",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273cec31736d4e88743ce5bb414"
+  },
+  {
+    "Title": "Changing channels",
+    "Artist": "Pangaea",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27320375355852b5d6c6b98cce9"
+  },
+  {
+    "Title": "Like..?",
+    "Artist": "Ice Spice",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2733a696fc544995ab8d0d6765f"
+  },
+  {
+    "Title": "Dogsbody",
+    "Artist": "Model/Actriz",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273951d686e850cb35eb4a92dd0"
+  },
+  {
+    "Title": "I've got me",
+    "Artist": "Joanna Sternberg",
+    "CoverArtURL": "https://media.pitchfork.com/photos/640897d5632b87694bd03e47/master/w_1280%2Cc_limit/Joanna-Sternberg.jpg"
+  },
+  {
+    "Title": "Ganger",
+    "Artist": "Veeze",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27360b1580d5d211f760cae4c33"
+  },
+  {
+    "Title": "Oh me Oh my",
+    "Artist": "Lonnie Holley",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f28ca6cfa364322880a09a8a"
+  },
+  {
+    "Title": "This stupid world",
+    "Artist": "Yo la tengo",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b65e24598993c715a41723f0"
+  },
+  {
+    "Title": "Girl in the half pearl",
+    "Artist": "Liv.e",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27325aa60a4ade8af97b0eacf90"
+  },
+  {
+    "Title": 12,
+    "Artist": "Ryuichi Sakamoto",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27372c084b2a6afd5914f4d66b1"
+  },
+  {
+    "Title": "Hood hottest princess",
+    "Artist": "Sexyy Red",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27338f8e4adcb8668df34ce1660"
+  },
+  {
+    "Title": "Heaven is a junkyard",
+    "Artist": "Youth lagoon",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273996c742c8d2ffde0b06ca1d1"
+  },
+  {
+    "Title": "Red moon in Venus",
+    "Artist": "Kali Uchis",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27381fccd758776d16b87721b17"
+  },
+  {
+    "Title": "Time ain't accidental",
+    "Artist": "Jess Williamson",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27360e9de3acfa618d1f0ab54c5"
+  },
+  {
+    "Title": "The enduring spirit",
+    "Artist": "Tomb mold",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738741191cc40dc87ffdde6288"
+  },
+  {
+    "Title": "Sun arcs",
+    "Artist": "Blue Lake",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273da882d9afc8badd85f7614d8"
+  },
+  {
+    "Title": "After the magic",
+    "Artist": "Parannoul",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273cae389ab4c2347ccc03d6e08"
+  },
+  {
+    "Title": "Signs",
+    "Artist": "Purelink",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734feb8bee8cac4280b7842540"
+  },
+  {
+    "Title": "Good living is coming for you",
+    "Artist": "Sweeping promises",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27373be677480b9a08f54fd0b26"
+  },
+  {
+    "Title": "New blue sun",
+    "Artist": "André 3000",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2732832c76386b5931717eddd3f"
+  },
+  {
+    "Title": "Diamond jubilee",
+    "Artist": "Cindy Lee",
+    "CoverArtURL": "https://f4.bcbits.com/img/a1091823768_10.jpg"
+  },
+  {
+    "Title": "Brat",
+    "Artist": "Charli XCX",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27388e3822cccfb8f2832c70c2e"
+  },
+  {
+    "Title": "Here in the pitch",
+    "Artist": "Jessica Pratt",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d6c735bd867af24e516ff659"
+  },
+  {
+    "Title": "Manning fireworks",
+    "Artist": "MJ Lenderman",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27329344b4d83b6f0ac27562c2d"
+  },
+  {
+    "Title": "Endlessness",
+    "Artist": "Nala Sinephro",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e6d52246a013b10185e0f55b"
+  },
+  {
+    "Title": "Tigers blood",
+    "Artist": "Waxahatchee",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27319002993531e44995cd185d9"
+  },
+  {
+    "Title": "Night palace",
+    "Artist": "Mount Eerie",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27387636c7ca99a61479b8281ed"
+  },
+  {
+    "Title": "Cold visions",
+    "Artist": "Bladee",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735b09d199301a34f922336a47"
+  },
+  {
+    "Title": "Great doubt",
+    "Artist": "Astrid Sonne",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738c16c4c88eca4899d91be1b3"
+  },
+  {
+    "Title": "The collective",
+    "Artist": "Kim Gordon",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27374cee9abc6d8e820f65b1cee"
+  },
+  {
+    "Title": "I got heaven",
+    "Artist": "Mannequin pussy",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27373d127cb0d93a4c74fb99525"
+  },
+  {
+    "Title": "#gigi",
+    "Artist": "Skaiwater",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273732dbf56b45b33ceb8dd8fd4"
+  },
+  {
+    "Title": "My method actor",
+    "Artist": "Nilüfer Yanya",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730f6593413aecfac96093b32b"
+  },
+  {
+    "Title": "Spectral evolution",
+    "Artist": "Rafael Toral",
+    "CoverArtURL": "https://f4.bcbits.com/img/a0959138693_10.jpg"
+  },
+  {
+    "Title": "If I don't make it, I love U",
+    "Artist": "Still house plants",
+    "CoverArtURL": "https://f4.bcbits.com/img/a3585616563_16.jpg"
+  },
+  {
+    "Title": "Ultimate love songs collection",
+    "Artist": "Doris",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f2845a88f02b36352aaa6fc3"
+  },
+  {
+    "Title": "Night reign",
+    "Artist": "Arooj Aftab",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f211b13912db237ee100ce1d"
+  },
+  {
+    "Title": "Two star & the dream police",
+    "Artist": "Mk.gee",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273173b8975e8a7820da5f1aeb6"
+  },
+  {
+    "Title": "Imaginal disk",
+    "Artist": "Magdalena Bay",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735a2ff617de4e51a9a214b56a"
+  },
+  {
+    "Title": "Sentir que no sabes",
+    "Artist": "Mabe Fratti",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27335cf0b8f2fb394adc117c53b"
+  },
+  {
+    "Title": "Charm",
+    "Artist": "Clairo",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273193c2fafdce8f116b5ca0a78"
+  },
+  {
+    "Title": "Tyla",
+    "Artist": "Tyla",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27334d2121bebebc1e7d9a0c369"
+  },
+  {
+    "Title": "Bright future",
+    "Artist": "Adrianne Lenker",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273292a05030d5c662e897196b4"
+  },
+  {
+    "Title": "The thief next to Jesus",
+    "Artist": "Ka",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d8091ac43ad6534c65fb7d84"
+  },
+  {
+    "Title": "Akoma",
+    "Artist": "Jlin",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27335d979d9c671b08268239338"
+  },
+  {
+    "Title": "Only God was above us",
+    "Artist": "Vampire weekend",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2731f4e2d002b9d1920339a5109"
+  },
+  {
+    "Title": "No title as of 13 february 2024, 28,340 dead",
+    "Artist": "Godspeed you! Black emperor",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a2f349fdb4ad68258a974af1"
+  },
+  {
+    "Title": "My light, my destroyer",
+    "Artist": "Cassandra Jenkins",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b90275415d03c3a038122840"
+  },
+  {
+    "Title": "Keep it goin Xav",
+    "Artist": "Xaviersobased",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e355cf51a8c0b115660a823a"
+  },
+  {
+    "Title": "Funeral for justice",
+    "Artist": "Mdou Moctar",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273f80a5bcb6add2db7324d8e3a"
+  },
+  {
+    "Title": "Patterns in repeat",
+    "Artist": "Laura Marling",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273aaf8ea30ab67741ab92c7271"
+  },
+  {
+    "Title": "Rong weickness",
+    "Artist": "Fievel is glauque",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273c7959f4ea02043971835f832"
+  },
+  {
+    "Title": "The past is still alive",
+    "Artist": "Hurray for the riff raff",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273a43b36e8d2a658325d220b1d"
+  },
+  {
+    "Title": "Absolute elsewhere",
+    "Artist": "Blood incantation",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273bcc52d700126fc4ec9c3c073"
+  },
+  {
+    "Title": "Short n' sweet",
+    "Artist": "Sabrina Carpenter",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273fd8d7a8d96871e791cb1f626"
+  },
+  {
+    "Title": "Orquídeas",
+    "Artist": "Kali Uchis",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273b968625b03ec59b30b48e9c3"
+  },
+  {
+    "Title": "Groovy steppin sh*t",
+    "Artist": "Lisha G & Trini Viv",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27340b6652a42986cc11f0058d0"
+  },
+  {
+    "Title": "Eels",
+    "Artist": "Being dead",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27344b780c89b6f5a2ebf784daf"
+  },
+  {
+    "Title": "Box for Buddy, box for Star",
+    "Artist": "This is Lorelei",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2735df409c6f866c32ca4c2374e"
+  },
+  {
+    "Title": "Still",
+    "Artist": "Erika de Casier",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273dc3c66fa4821d32e834af963"
+  },
+  {
+    "Title": "Opus",
+    "Artist": "Ryuichi Sakamoto",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27374080dfd4a1960538efc8976"
+  },
+  {
+    "Title": "One day",
+    "Artist": "Loidis",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273d61d3cbb57e601498bb8a127"
+  },
+  {
+    "Title": "Wood blues",
+    "Artist": "Ahmed",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b27324fa0012534f5eb336b0565a"
+  },
+  {
+    "Title": "Leave another day",
+    "Artist": "Milan W",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273e478a8f84bd06174ba2b6e4e"
+  },
+  {
+    "Title": "Casts of a dreamer",
+    "Artist": 454,
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2730eb4ade4ee4521337930bef7"
+  },
+  {
+    "Title": "Your day will come",
+    "Artist": "Chanel beads",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2738671a62813f58b499c8fccc3"
+  },
+  {
+    "Title": "Phasor",
+    "Artist": "Helado Negro",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273cdae80a73429b6936e40499c"
+  },
+  {
+    "Title": "Meaning's edge (EP)",
+    "Artist": "Djrum",
+    "CoverArtURL": "https://f4.bcbits.com/img/0037856320_16.jpg"
+  },
+  {
+    "Title": "Almighty so 2",
+    "Artist": "Chief Keef",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b2734eecd9c840fa38687e6fe009"
+  },
+  {
+    "Title": "Viewfinder",
+    "Artist": "Wendy Eisenberg",
+    "CoverArtURL": "https://i.scdn.co/image/ab67616d0000b273499e1042d8c2c918ba8315ae"
+  }
+];
+
+  // Seeded random generator function using a simple linear congruential generator (LCG)
+    function seededRandom(seed) {
+      return function() {
+        seed = (seed * 9301 + 49297) % 233280;
+        return seed / 233280;
+      };
+    }
+    
+    // Updated daily album function using the seeded random generator
+    function getDailyAlbumIndex() {
+      const today = new Date();
+      const startOfYear = new Date(today.getFullYear(), 0, 0);
+      const diff = today - startOfYear;
+      const oneDay = 1000 * 60 * 60 * 24;
+      const dayOfYear = Math.floor(diff / oneDay);
+      console.log("Day of Year:", dayOfYear);
+      const random = seededRandom(dayOfYear);
+      return Math.floor(random() * albumData.length);
+    }
+
+
+    // Get the album for today using the correct keys
+    const albumIndex = getDailyAlbumIndex();
+    const album = albumData[albumIndex];
+
+    // Display the album details on the page
+    const container = document.getElementById('album-container');
+    container.innerHTML = `
+      <h1>${album["Title"]}</h1>
+      <h2>${album["Artist"]}</h2>
+      <img src="${album["CoverArtURL"]}" alt="${album["Title"]} Cover Art">
+    `;
+	
+	
+
+  </script>
+  
+ </body>
+ 
+</html>
