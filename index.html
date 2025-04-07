@@ -42,15 +42,65 @@
       margin-bottom: 30px;
       color: #ddd;
     }
-    
+        /* History table styling */
+    #history {
+      margin: 20px auto;
+      max-width: 500px;
+      text-align: left;
+      display: none;
+    }
+    #history table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    #history th, #history td {
+      padding: 8px;
+      border: 1px solid #444;
+    }
+    #history th {
+      background-color: #333;
+    }
+    /* Tab toggle buttons */
+    .tab-buttons button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 1em;
+      cursor: pointer;
+    }
 }
   </style>
   
   
   </head>
 <body>
-  <!-- Album info will be displayed inside this card -->
-  <div class="album-card" id="album-container"></div>
+  <div class="container">
+    <!-- Button tab to switch between today's album and history -->
+    <div class="tab-buttons">
+      <button id="today-tab">Today's Album</button>
+      <button id="history-tab">Album History</button>
+    </div>
+    
+    <!-- Today's album view -->
+    <div id="today-view" class="album-card">
+      <div id="album-container"></div>
+    </div>
+    
+    <!-- History view -->
+    <div id="history">
+      <h2>Album History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Day</th>
+            <th>Album Title</th>
+            <th>Artist</th>
+          </tr>
+        </thead>
+        <tbody id="history-body">
+          <!-- History rows will be added here -->
+        </tbody>
+      </table>
+    </div>
   
 <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
 <hyvor-talk-comments
@@ -60,6 +110,37 @@
 
   
   <script>
+  
+    // 1. Define the seeded random generator (LCG)
+    function seededRandom(seed) {
+      return function() {
+        seed = (seed * 9301 + 49297) % 233280;
+        return seed / 233280;
+      };
+    }
+    
+    // 2. Helper function: get album index for a given seed
+    function getDailyAlbumIndexForSeed(seed) {
+      const random = seededRandom(seed);
+      return Math.floor(random() * albumData.length);
+    }
+    
+    // 3. Helper function: returns today's day-of-year
+    function getTodayDayOfYear() {
+      const today = new Date();
+      const startOfYear = new Date(today.getFullYear(), 0, 0);
+      const diff = today - startOfYear;
+      const oneDay = 1000 * 60 * 60 * 24;
+      return Math.floor(diff / oneDay);
+    }
+    
+    // 4. Main function: get album index for today using day-of-year as seed
+    function getDailyAlbumIndex() {
+      const dayOfYear = getTodayDayOfYear();
+      console.log("Day of Year:", dayOfYear);
+      return getDailyAlbumIndexForSeed(dayOfYear);
+    }
+	
     // Step 3: Embed your album data array
     const albumData = [
   {
@@ -2319,40 +2400,78 @@
   }
 ];
 
-  // Seeded random generator function using a simple linear congruential generator (LCG)
-    function seededRandom(seed) {
-      return function() {
-        seed = (seed * 9301 + 49297) % 233280;
-        return seed / 233280;
-      };
+
+    // 6. Function to get query parameter "album"
+    function getQueryParameter(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
     }
     
-    // Updated daily album function using the seeded random generator
-    function getDailyAlbumIndex() {
-      const today = new Date();
-      const startOfYear = new Date(today.getFullYear(), 0, 0);
-      const diff = today - startOfYear;
-      const oneDay = 1000 * 60 * 60 * 24;
-      const dayOfYear = Math.floor(diff / oneDay);
-      console.log("Day of Year:", dayOfYear);
-      const random = seededRandom(dayOfYear);
-      return Math.floor(random() * albumData.length);
+    // 7. Determine which album to display based on query parameter or today's album
+    let albumToDisplay;
+    const albumQuery = getQueryParameter('album');
+    if (albumQuery) {
+      albumToDisplay = albumData.find(a => a.Title === albumQuery);
+      if (!albumToDisplay) {
+        albumToDisplay = albumData[getDailyAlbumIndex()];
+      }
+    } else {
+      albumToDisplay = albumData[getDailyAlbumIndex()];
     }
-
-
-    // Get the album for today using the correct keys
-    const albumIndex = getDailyAlbumIndex();
-    const album = albumData[albumIndex];
-
-    // Display the album details on the page
-    const container = document.getElementById('album-container');
-    container.innerHTML = `
-      <h1>${album["Title"]}</h1>
-      <h2>${album["Artist"]}</h2>
-      <img src="${album["CoverArtURL"]}" alt="${album["Title"]} Cover Art">
+    
+    // 8. Display the chosen album in the album container
+    document.getElementById('album-container').innerHTML = `
+      <h1>${albumToDisplay["Title"]}</h1>
+      <h2>${albumToDisplay["Artist"]}</h2>
+      <img src="${albumToDisplay["CoverArtURL"]}" alt="${albumToDisplay["Title"]} Cover Art">
     `;
-	
-	
+    
+    // 9. Generate album history using a project start day offset
+    function generateHistory() {
+      const projectStartDay = 96; // The project started on day 96 of the year
+      const todayDay = getTodayDayOfYear();
+      let historyHTML = "";
+      
+      if (todayDay < projectStartDay) {
+        historyHTML = "<tr><td colspan='3'>No history available yet.</td></tr>";
+      } else {
+        for (let day = projectStartDay; day <= todayDay; day++) {
+          // Re-index so that projectStartDay becomes Day 1
+          const displayDay = day - projectStartDay + 1;
+          const idx = getDailyAlbumIndexForSeed(day);
+          const alb = albumData[idx];
+          // Create a clickable row with a link that includes the album as a query parameter
+          const link = window.location.pathname + "?album=" + encodeURIComponent(alb.Title);
+          historyHTML += `<tr onclick="window.location='${link}'" style="cursor:pointer;">
+            <td>Day ${displayDay}</td>
+            <td>${alb.Title}</td>
+            <td>${alb.Artist}</td>
+          </tr>`;
+        }
+      }
+      document.getElementById('history-body').innerHTML = historyHTML;
+    }
+    generateHistory();
+    
+    // 10. Tab toggle event listeners
+    document.getElementById('today-tab').addEventListener('click', () => {
+      // Remove any query parameters from the URL using the History API
+      history.replaceState(null, "", window.location.pathname);
+      // Reload today's album
+      const todayAlbum = albumData[getDailyAlbumIndex()];
+      document.getElementById('album-container').innerHTML = `
+        <h1>${todayAlbum["Title"]}</h1>
+        <h2>${todayAlbum["Artist"]}</h2>
+        <img src="${todayAlbum["CoverArtURL"]}" alt="${todayAlbum["Title"]} Cover Art">
+      `;
+      document.getElementById('today-view').style.display = 'block';
+      document.getElementById('history').style.display = 'none';
+    });
+    
+    document.getElementById('history-tab').addEventListener('click', () => {
+      document.getElementById('today-view').style.display = 'none';
+      document.getElementById('history').style.display = 'block';
+    });
 
   </script>
   
